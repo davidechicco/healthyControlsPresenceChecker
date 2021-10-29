@@ -1,12 +1,12 @@
 Encoding: UTF-8
 Package: healthyControlsPresenceChecker
 Title: Dowloads A Gene Expression Dataset From GEO And Checks If It Contains Data Of Healthy Controls Or Not
-Version: 0.1.1
+Version: 0.99.1
 Authors@R: person("Davide", "Chicco", email = "davide.chicco@gmail.com", comment = c(ORCID = "0000-0001-9655-7142"),
                   role = c("aut", "cre"))
 Description: A function that reads in the GEO accession code of a gene expression dataset, retrieves its data from GEO, and checks if data of healthy controls are present in the dataset. It returns true if healthy controls data are found, and false otherwise.  GEO: Gene Expression Omnibus. ID: identifier code. The GEO datasets are downloaded from the URL <https://ftp.ncbi.nlm.nih.gov/geo/series/>.
 BugReports: https://github.com/davidechicco/healthyControlsPresenceChecker/issues
-Depends: R (>= 4.0.0)
+Depends: R (>= 4.0.3)
 License: GPL-3 
 URL: https://github.com/davidechicco/healthyControlsPresenceChecker
 biocViews: GEO, RepositoryData, ExpressionData
