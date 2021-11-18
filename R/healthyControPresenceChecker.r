@@ -2,12 +2,11 @@
 #'
 #' @param datasetGeoCode the GEO code of a dataset.
 #' @param verbose a boolean flag stating if helping messages should be printed or not
+#' @export
+#' @import geneExpressionFromGEO GEOquery xml2
 #' @return a boolean value
 #' @examples
-#' healthyControlsCheckOutcome1 <- healthyControlsCheck("GSE3268", FALSE)
-#' healthyControlsCheckOutcome2 <- healthyControlsCheck("GSE19429", TRUE)
-#' healthyControlsCheckOutcome3 <- healthyControlsCheck("GSE34111", FALSE)
-#' healthyControlsCheckOutcome4 <- healthyControlsCheck("GSE47407", TRUE)
+#' healthyControlsCheckOutcome <- healthyControlsCheck("GSE3268", FALSE)
 healthyControlsCheck <- function(datasetGeoCode, verbose = FALSE) 
 {
 
@@ -31,12 +30,12 @@ healthyControlsCheck <- function(datasetGeoCode, verbose = FALSE)
 #             
             if(all(checked_html_text == "EMPTY_STRING")) {
          
-                    cat("The web url https://ftp.ncbi.nlm.nih.gov/geo/series/ is unavailable right now. Please try again later. The function will stop here\n")
+                    message("The web url https://ftp.ncbi.nlm.nih.gov/geo/series/ is unavailable right now. Please try again later. The function will stop here\n")
                     return(NULL)
                     
             } else if(all(checked_html_text_url == "EMPTY_STRING" | is.null(checked_html_text_url[[1]]) )) {
          
-                    cat("The web url ", complete_url," is unavailable right now (Error 404 webpage not found). The GEO code might be wrong. The function will stop here\n", sep="")
+                    message("The web url ", complete_url," is unavailable right now (Error 404 webpage not found). The GEO code might be wrong. The function will stop here\n")
                     return(NULL)        
                     
             } else {
@@ -48,20 +47,53 @@ healthyControlsCheck <- function(datasetGeoCode, verbose = FALSE)
 	      if (length(gset) > 1) idx <- grep(thisGEOplatform, attr(gset, "names")) else idx <- 1
 	      gset <- gset[[idx]]
 	      
-	      if(verbose == TRUE) cat("=== === === === === ", GSE_code, " === === === === ===  \n", sep="")
+	      if(verbose == TRUE) message("=== === === === === ", GSE_code, " === === === === ===  \n")
 	      
-	      healthyControlWordPresent <- grepl("healthy control", (gset@phenoData@data)) %>% any()
-	       if(healthyControlWordPresent == TRUE) {
+               if(verbose == TRUE) message("=== === === === === ", GSE_code, " === === === === ===  \n")
+                
+                healthyWordPresent <- grepl("healthy", (gset@phenoData@data)) %>% any()
+                if(healthyWordPresent == TRUE) {
+                
+                    if(verbose == TRUE) message(":: The keyword \"healthy\" was found in this dataset annotations (", GSE_code, ")\n")
+                    healthy_indexes <- which(grepl("healthy", (gset@phenoData@data)))
+		            if(verbose == TRUE)  message("on ", length(healthy_indexes), " feature(s)\n")
+                    healthy_indexes <- which(grepl("healthy", (gset@phenoData@data)))
+                    
+                    countFeatures <- 1
+                    for(i in healthy_indexes){
+                        this_feature <- (gset@phenoData@data)[i] %>% colnames()  
+                        if(verbose == TRUE)  message("\n(", countFeatures, ") \"", this_feature, "\" feature\n")
+                        if(verbose == TRUE) (gset@phenoData@data)[i] %>% table() %>% print()
+                        
+                        thisFeatureGroups <- (gset@phenoData@data)[i] %>% table()
+                        thisFeatureGroupsNames <- thisFeatureGroups %>% names()
+                        numGroupsInThisFeature <- thisFeatureGroups  %>% nrow()
+
+                        for(k in 1:length(thisFeatureGroups)) {
+                                if(verbose == TRUE)  message(thisFeatureGroupsNames[k], ": ")
+                                thisFeatureGroupPerc <- thisFeatureGroups[[k]] * 100 / (gset@phenoData@data) %>% nrow()
+                                if(verbose == TRUE)  message("\t", geneExpressionFromGEO::dec_two(thisFeatureGroupPerc), "%\n")
+                        }
+                        
+                        countFeatures <- countFeatures + 1
+                    }
+                } else { 
+                    if(verbose == TRUE) message(":: The keyword \"healthy\" was NOT found among the annotations of this dataset (", GSE_code, ")\n") 
+                }     
+                
+                
+           healthyControlWordPresent <- grepl("healthy control", (gset@phenoData@data)) %>% any()
+	      if(healthyControlWordPresent == TRUE) {
 	      
-		       if(verbose == TRUE) cat(":: The keyword \"healthy control\" was found in this dataset annotations (", GSE_code, ") ", sep="")
+		       if(verbose == TRUE) message(":: The keyword \"healthy control\" was found in this dataset annotations (", GSE_code, ") ")
 		       healthy_control_indexes <- which(grepl("healthy control", (gset@phenoData@data)))
-		       cat("on ", length(healthy_control_indexes), " feature(s)\n", sep="")
+		       if(verbose == TRUE)  message("on ", length(healthy_control_indexes), " feature(s)\n")
 		       
 		       countFeatures <- 1
 		       
 		       for(i in healthy_control_indexes){
                     this_feature <- (gset@phenoData@data)[i] %>% colnames()  
-                    if(verbose == TRUE)  cat("\n(", countFeatures, ") \"", this_feature, "\" feature\n", sep="")
+                    if(verbose == TRUE)  message("\n(", countFeatures, ") \"", this_feature, "\" feature\n")
                     if(verbose == TRUE) (gset@phenoData@data)[i] %>% table() %>% print()
                     
                     thisFeatureGroups <- (gset@phenoData@data)[i] %>% table()
@@ -69,21 +101,23 @@ healthyControlsCheck <- function(datasetGeoCode, verbose = FALSE)
                     numGroupsInThisFeature <- thisFeatureGroups  %>% nrow()
 
                     for(k in 1:length(thisFeatureGroups)) {
-                            cat(thisFeatureGroupsNames[k], ": ", sep="")
+                            message(thisFeatureGroupsNames[k], ": ")
                             thisFeatureGroupPerc <- thisFeatureGroups[[k]] * 100 / (gset@phenoData@data) %>% nrow()
-                            cat("\t", geneExpressionFromGEO::dec_two(thisFeatureGroupPerc), "%\n", sep="")
-                        }
+                            if(verbose == TRUE)  message("\t", geneExpressionFromGEO::dec_two(thisFeatureGroupPerc), "%\n")
+                    }
                     
                     countFeatures <- countFeatures + 1
-                    }
+		          }
                 } else { 
-                    if(verbose == TRUE) cat(":: The keyword \"healthy control\" was NOT found among the annotations of this dataset (", GSE_code, ")\n", sep="") 
+                    if(verbose == TRUE) message(":: The keyword \"healthy control\" was NOT found among the annotations of this dataset (", GSE_code, ")\n") 
                 }            
             }
+                        
+            if(verbose == TRUE)  message("=== === === === === === === === === === === ===  \n")
             
-            if(verbose == TRUE)  cat("=== === === === === === === === === === === ===  \n", sep="")
-            
-            return(healthyControlWordPresent)
+            outcome <- (healthyControlWordPresent | healthyWordPresent)
+            if(verbose == TRUE)  message("\nhealthyControlsCheck() call output: were healthy controls found in the ", GSE_code, " dataset? ", outcome, "\n")
+            return(outcome)
 }   
 
   

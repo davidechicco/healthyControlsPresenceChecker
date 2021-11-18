@@ -1,4 +1,5 @@
-exportPattern( "." )
-import(stats)
-import(utils)
+export(healthyControlsCheck)
+import("GEOquery")
+import("geneExpressionFromGEO")
+import("xml2")
 importFrom(magrittr,"%>%")
