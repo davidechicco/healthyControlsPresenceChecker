@@ -1,11 +1,24 @@
----
-title: "healthyControlsPresenceCheckervignette"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{healthyControlsPresenceCheckervignette}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
+-- https://www.bioconductor.org/packages/devel/bioc/vignettes/BiocStyle/inst/doc/AuthoringRmdVignettes.html
+
+  ---
+  title: "healthyControlsPresenceChecker vignette"
+  author: "Davide Chicco"
+  email: davide.chicco@gmail.com
+  date: "`r Sys.Date()`"
+  package: healthyControlsPresenceChecker
+  abstract: >
+  healthyControlsPresenceChecker allows users to verify if a specific GEO dataset contains data of healthy controls amongside data of patients. 
+  output: 
+    BiocStyle::html_document
+  vignette: >
+    %\VignetteIndexEntry{healthyControlsPresenceChecker vignette}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}  
+  ---
+
+```{r style, echo = FALSE, results = 'asis'}
+  BiocStyle::markdown()
+```
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -29,8 +42,7 @@ Here we propose a software package that can immedaitely inform the user if data 
 
 healthyControlsPresenceChecker allows users to verify if a specific GEO dataset contains data of healthy controls amongside data of patients. 
  
-
-## Installation via GitHub
+ <!-- ## Installation via GitHub
 
 At the current status, the easyiest way to install the package is through a clone from GitHub:
 
@@ -51,7 +63,7 @@ The package can then be loaded with the following commands:
 
 `cd healthyControlsPresenceChecker`
 `R`
-`source("./R/healthyControPresenceChecker.r")`
+`source("./R/healthyControPresenceChecker.r")` -->
 
 
 ## Installation via Bioconductor
@@ -77,8 +89,9 @@ The usage of healthyControlsPresenceChecker is very easy. The main function `hea
 For example, if the user wants to know if the [GSE47407](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE47407) dataset contains data of healthy controls, she/he can type on a terminal shell within the R environment:
 
 
-`outcomeGSE47407 <- healthyControlsCheck("GSE47407", TRUE)`
-
+```{r, eval=TRUE}
+outcomeGSE47407 <- healthyControlsCheck("GSE47407", TRUE)
+```
 
 The function will print all the intermediate messages, and eventually the `outcomeGSE47407` variable will be true if healthy controls were found, or false otherwise.
 
