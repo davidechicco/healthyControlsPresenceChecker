@@ -1,0 +1,18 @@
+citHeader("To cite the package 'healthyControlsPresenceChecker' in publications use:")
+
+citEntry(
+  entry        = "Article",
+  title        = "geoCancerDiagnosticDatasetsRetriever, a bioinformatics application for handily detecting cancer diagnostic datasets on Gene Expression Omnibus (GEO)",
+  journal      = "Under review",
+  author       = personList(as.person("Davide Chicco"),
+                   as.person("Abbas Alameer")),
+	year         = "2021",
+	doi          = "",
+  url          = "http://bioconductor.org/packages/healthyControlsPresenceChecker/",
+
+  textVersion  =
+  paste("Davide Chicco, Abbas Alameer (2021).",
+        "geoCancerDiagnosticDatasetsRetriever, a bioinformatics application for handily detecting cancer diagnostic datasets on Gene Expression Omnibus (GEO)\n",
+        " - URL: http://bioconductor.org/packages/healthyControlsPresenceChecker/",
+        " - Under review")
+)
