@@ -51,7 +51,7 @@ healthyControlsCheck <- function(datasetGeoCode, verbose = FALSE)
 	      
                if(verbose == TRUE) message("=== === === === === ", GSE_code, " === === === === ===  \n")
                 
-                healthyWordPresent <- grepl("healthy", (gset@phenoData@data)) %>% any()
+                healthyWordPresent <- grepl("healthy|Healthy", (gset@phenoData@data)) %>% any()
                 if(healthyWordPresent == TRUE) {
                 
                     if(verbose == TRUE) message(":: The keyword \"healthy\" was found in this dataset annotations (", GSE_code, ")\n")
@@ -82,11 +82,11 @@ healthyControlsCheck <- function(datasetGeoCode, verbose = FALSE)
                 }     
                 
                 
-           healthyControlWordPresent <- grepl("healthy control", (gset@phenoData@data)) %>% any()
+           healthyControlWordPresent <- grepl("control|Controlcontrols|Controls", (gset@phenoData@data)) %>% any()
 	      if(healthyControlWordPresent == TRUE) {
 	      
-		       if(verbose == TRUE) message(":: The keyword \"healthy control\" was found in this dataset annotations (", GSE_code, ") ")
-		       healthy_control_indexes <- which(grepl("healthy control", (gset@phenoData@data)))
+		       if(verbose == TRUE) message(":: The keyword \"control\" was found in this dataset annotations (", GSE_code, ") ")
+		       healthy_control_indexes <- which(grepl("control", (gset@phenoData@data)))
 		       if(verbose == TRUE)  message("on ", length(healthy_control_indexes), " feature(s)\n")
 		       
 		       countFeatures <- 1
@@ -109,7 +109,7 @@ healthyControlsCheck <- function(datasetGeoCode, verbose = FALSE)
                     countFeatures <- countFeatures + 1
 		          }
                 } else { 
-                    if(verbose == TRUE) message(":: The keyword \"healthy control\" was NOT found among the annotations of this dataset (", GSE_code, ")\n") 
+                    if(verbose == TRUE) message(":: The keyword \"control\" was NOT found among the annotations of this dataset (", GSE_code, ")\n") 
                 }            
             }
                         

@@ -1,5 +1,3 @@
--- https://www.bioconductor.org/packages/devel/bioc/vignettes/BiocStyle/inst/doc/AuthoringRmdVignettes.html
-
   ---
   title: "healthyControlsPresenceChecker vignette"
   author: "Davide Chicco"
@@ -72,16 +70,18 @@ Once this package will be available on Bioconductor, it will be possibile to ins
 
 Start R (version "4.1") and enter:
 
-`if (!requireNamespace("BiocManager", quietly = TRUE))`
-        `install.packages("BiocManager")`
+```{r eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))`
+        `install.packages("BiocManager")
 
-`BiocManager::install("healthyControlsPresenceChecker")`
-
+BiocManager::install("healthyControlsPresenceChecker")
+```
 
 It will be possible to load the package with the following command:
 
-`library("healthyControlsPresenceChecker")`
-
+```{r eval=FALSE}
+library("healthyControlsPresenceChecker")
+```
 
 ## Usage
 
