@@ -5,30 +5,6 @@ healthyControlsPresenceChecker
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 This package allows users to verify if a specific GEO dataset contains data of healthy controls amongside data of patients. 
- <!--## Installation via GitHub
-
-At the current status, the easyiest way to install the package is through a clone from GitHub:
-
-```{bash
-git clone https://github.com/davidechicco/healthyControlsPresenceChecker.git
-```
-
-The following R packages need to be installed beforehand:
-
-    stats
-    utils
-    xml2
-    GEOquery
-    geneExpressionFromGEO
-    magrittr
-    
-The package can then be loaded with the following commands:
-
-```{r}
-cd healthyControlsPresenceChecker
-R
-source("./R/healthyControPresenceChecker.r")
-```-->
 
 ## Installation via Bioconductor
 
