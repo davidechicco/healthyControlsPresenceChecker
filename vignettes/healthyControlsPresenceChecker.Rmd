@@ -1,18 +1,18 @@
-  ---
-  title: "healthyControlsPresenceChecker vignette"
-  author: "Davide Chicco"
-  email: davide.chicco@gmail.com
-  date: "`r Sys.Date()`"
-  package: healthyControlsPresenceChecker
-  abstract: >
-  healthyControlsPresenceChecker allows users to verify if a specific GEO dataset contains data of healthy controls amongside data of patients. 
-  output: 
-    BiocStyle::html_document
-  vignette: >
-    %\VignetteIndexEntry{healthyControlsPresenceChecker vignette}
-    %\VignetteEngine{knitr::rmarkdown}
-    %\VignetteEncoding{UTF-8}  
-  ---
+---
+title: "healthyControlsPresenceChecker vignette"
+author: "Davide Chicco"
+email: davide.chicco@gmail.com
+date: "`r Sys.Date()`"
+package: healthyControlsPresenceChecker
+abstract: >
+healthyControlsPresenceChecker allows users to verify if a specific GEO dataset contains data of healthy controls amongside data of patients. 
+output: 
+BiocStyle::html_document
+vignette: >
+%\VignetteIndexEntry{healthyControlsPresenceChecker vignette}
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteEncoding{UTF-8}  
+---
 
 ```{r style, echo = FALSE, results = 'asis'}
   BiocStyle::markdown()
