@@ -6,7 +6,8 @@
 #' @import geneExpressionFromGEO GEOquery xml2
 #' @return a boolean value
 #' @examples
-#' healthyControlsCheckOutcome <- healthyControlsCheck("GSE3268", FALSE)
+#' healthyControlsCheckGSE3268Outcome <- healthyControlsCheck("GSE3268", FALSE)
+#' healthyControlsCheckGSE58831Outcome <- healthyControlsCheck("GSE58831", TRUE)
 healthyControlsCheck <- function(datasetGeoCode, verbose = FALSE) 
 {
 

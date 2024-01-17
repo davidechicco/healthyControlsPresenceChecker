@@ -18,5 +18,6 @@ a boolean value
 Function that reads in the GEO code of a dataset, and returns true if there's at least a feature containing the healthy controls.
 }
 \examples{
-healthyControlsCheckOutcome <- healthyControlsCheck("GSE3268", FALSE)
+healthyControlsCheckGSE3268Outcome <- healthyControlsCheck("GSE3268", FALSE)
+healthyControlsCheckGSE58831Outcome <- healthyControlsCheck("GSE58831", TRUE)
 }

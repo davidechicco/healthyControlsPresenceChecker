@@ -64,12 +64,21 @@ library("healthyControlsPresenceChecker")
 The usage of healthyControlsPresenceChecker is very easy. The main function `healthyControlsCheck()` reads two input arguments: the GEO accession code of the dataset for which the user wants to verify the presence of the healthy controls, and a verbose flag.
 For example, if the user wants to know if the [GSE47407](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE47407) dataset contains data of healthy controls, she/he can type on a terminal shell within the R environment:
 
-
 ```{r, eval=TRUE}
-outcomeGSE47407 <- healthyControlsCheck("GSE47407", TRUE)
+verboseFlag <- TRUE
+outcomeGSE47407 <- healthyControlsCheck("GSE47407", verboseFlag)
 ```
 
 The function will print all the intermediate messages, and eventually the `outcomeGSE47407` variable will be true if healthy controls were found, or false otherwise.
+
+```{r, eval=TRUE}
+verboseFlag <- TRUE
+outcomeGSE58831 <- healthyControlsCheck("GSE58831", verboseFlag)
+```
+
+The function will print all the intermediate messages, and eventually the `outcomeGSE58831` variable will be true if healthy controls were found, or false otherwise.
+
+
 
 ## Contacts
 
